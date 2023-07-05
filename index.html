@@ -6,14 +6,14 @@
     <link href="https://kimkee.github.io/ui/static/img/common/favicon.ico" rel="shrtcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="./style.css">
     <script src="./jquery-3.6.0.js"></script>
     <style>
         
     </style>
 </head>
-<body>
+<body style="padding: 24rem;">
 <span class="select-pop a">
     <select class="slist" name="select_pop_2">
         <option value="value_0">옵션 선택 스와이프</option>
@@ -76,17 +76,22 @@
             sld:{ // 
                 els:".pop-select .swiper-container",
                 opt: {
-                    freeMode: true,
-                    freeModeSticky:true,
+                    // freeMode: true,
+                    // freeModeSticky:true,
                     centeredSlides:true,
                     direction:"vertical",
                     slidesPerView: 3,
+                    freeMode: {
+                        enabled: true,
+                        sticky: true,
+                        momentumRatio: 0.2,
+                    },
                     // mousewheel: {
                     // 	invert: false,
                     // 	sensitivity: 0.2,
                     // },
                     speed: 100,  // 300
-                    freeModeMomentumRatio: 0.2,  // 1
+                    freeModeMomentumRatio: 1.2,  // 1
                     observer: true,
                     observeParents: true,
                     spaceBetween:0,

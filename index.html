@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Select</title>
+    <meta charset="utf-8">
+    <link href="https://kimkee.github.io/ui/static/img/common/favicon.ico" rel="shrtcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+<span class="select-pop a">
+    <select class="slist" name="select_pop_2">
+        <option value="value_0">옵션 선택 스와이프</option>
+        <option value="value_1">1번째 선택</option>
+        <option value="value_2" disabled>2번째 비활성</option>
+        <option value="value_3">3번째 선택</option>
+        <option value="value_4">4번째 선택</option>
+        <option value="value_5">5번째 선택</option>
+        <option value="value_6">6번째 선택</option>
+        <option value="value_7">7번째 선택</option>
+        <option value="value_8">8번째 선택</option>
+    </select>
+</span>
+<script>
+    const ui = {
+        popsel:{ // 셀렉트 스와이프
+            init:function(){
+                this.evt();
+                this.set();
+            },
+            evt:function(){
+                var _this = this;
+
+                $(document).on("click",".pop-select",function(e) {
+                    // console.log(e.target);
+                    if ( !$(e.target).closest(".pop-select .pbd").length ) {
+                        _this.close();
+                    }
+                });
+
+                $(document).on("click",".select-pop .btsel:not(.open)",function(){
+                    var $pop = $(this).closest(".select-pop");
+                    var name = $pop.find(".slist").attr("name");
+                    var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
+                    var sel =  $pop.find(".slist").val();
+                    var list = [];
+                    
+                    // console.log(name,tit,list,sel);
+                    _this.open(name,tit,list,sel);
+                    $(".ui-sorts").removeClass("open");
+                });
+
+                $(document).on("click",".pop-select .btsbot .btcom",function(e){
+                    var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");
+                    var txt = $(this).closest(".pop-select").find(".swiper-slide-active .bt").text();
+                    var name =  $(this).closest(".pop-select").data("selt-pop");
+                    var tit = $("select[name='"+name+"']").data("select-title");
+                    // console.log(name,sel);
+                    $("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
+                    $("select[name='"+name+"']").val(sel).prop("selected",true);
+                    $("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
+                    $("select[name='"+name+"']").trigger("change");
+                    _this.close();
+                });
+
+                $(document).on("click",".pop-select .btn-sel-close",function(){
+                    _this.close();
+                });
+            },
+            sld:{ // 
+                els:".pop-select .swiper-container",
+                opt: {
+                    freeMode: true,
+                    freeModeSticky:true,
+                    centeredSlides:true,
+                    direction:"vertical",
+                    slidesPerView: 3,
+                    // mousewheel: {
+                    // 	invert: false,
+                    // 	sensitivity: 0.2,
+                    // },
+                    speed: 100,  // 300
+                    freeModeMomentumRatio: 0.2,  // 1
+                    observer: true,
+                    observeParents: true,
+                    spaceBetween:0,
+                    watchOverflow:true,
+                    loop: false
+                },
+                using: function() {
+                    if( $(this.els).find(".swiper-slide").length <= 1 ) {
+                        this.opt.loop = false;
+                    }
+                    this.slide = new Swiper(this.els, this.opt);
+                }
+            },
+            set:function(update){
+                $(".select-pop").each(function(){
+                    if( !$(this).find(".btsel").length ) {
+                        $(this).prepend('<button class="btsel" type="button"></button>');
+                    }
+                    if( !$(this).is(".set").length ) {
+                        $(this).addClass("set");
+                    }
+                    var $btsel = $(this).find(".btsel");
+                    $btsel.addClass("is-tit");			
+                    var txt = $(this).find(".slist option:selected").text() ;
+                    var dis = $(this).find(".slist").prop("disabled");
+                    var list = [];
+                    $(this).find(".slist option").each(function(){
+                        var isDis = $(this).prop("disabled");
+                        list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+                    });
+                    // console.log(list ,txt ,dis);
+                    if (update == "update") {
+                        tit = $(this).find(".slist>option:selected").text();
+                    }else{
+                        tit = $(this).find(".slist").data("select-title")|| $(this).find(".slist>option:selected").text();
+                    }
+                    $btsel.html('<i class="txt">'+txt+'</i>');
+
+                    if( dis == true ) {
+                        $btsel.prop("disabled",true);
+                    }else{
+                        $btsel.prop("disabled",false);
+                    }
+                });
+            },
+            open:function(name,tit,list,sel){
+                // console.log(name,tit,list,sel);
+                $(".pop-select.on").remove();
+                if ( $(".pop-select:visible").length ) { return; }
+
+                $("[name='"+name+"']").find("option").each(function(){
+                    var isDis = $(this).prop("disabled");
+                    list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+                });
+                // console.log(list);
+
+                var blist="";
+                for(var i in list) {
+                    // console.log(list[i].d);
+                    var dis;
+                    if (list[i].d == true) {
+                        dis = "disabled";
+                    }else{
+                        dis = "";
+                    }
+                    blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
+                }
+                var lyPop =
+                '<article class="pop-select" data-selt-pop="'+name+'">' +
+                '	<div class="pbd">' +
+                '		<div class="phd"><h3 class="ptit">'+tit+'</h3></div>' +
+                '		<button type="button" class="btn-sel-close">닫기</button>' +
+                '		<div class="pct">' +
+                '			<main class="poptents">' +
+                '				<div class="swiper-container slide">' +
+                '					<ul class="swiper-wrapper list">'+blist+'</ul>' +
+                '				</div>' +
+                '				<div class="btsbot btn-set">' +
+                '					<button type="button" class="btn a lg btcom">완료</button>' +
+                '				</div>' +
+                '			</main>' +
+                '		</div>' +
+                '	</div>' +
+                '</article>';
+                $("body").append(lyPop);
+                this.sld.using();
+                $("[name='"+name+"']").closest(".select-pop").find(".btsel").addClass("open");
+                var _this = this;
+                $(".pop-select").fadeIn(100,function(){	
+                    $(this).addClass("on").attr("tabindex","0").focus();
+                    // console.log(name, sel);
+                    $("[data-selt-pop='"+name+"'] .list .bt[value='"+sel+"']").addClass("active").closest("li").addClass("active");
+                    var activeIdx = $("[data-selt-pop='"+name+"'] .list>li.active").index();
+                    // console.log(   activeIdx  );
+                    _this.sld.slide.slideTo(activeIdx);
+                });
+                _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
+                    var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
+                    // console.log("END" , isActDis);
+                    if (isActDis == true) {
+                        $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",true);
+                    }else{
+                        $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",false);
+                    }
+                });
+                // ui.lock.using(true);
+                $("body").addClass("is-pop-select");
+            },
+            close:function(){
+                var id = $(".pop-select:visible").data("selt-pop");
+                $(".pop-select").removeClass("on").fadeOut(100,function(){
+                    $(this).remove();
+                    // ui.lock.using(false);
+                });
+                $("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open").focus();
+                $("body").removeClass("is-pop-select");
+                console.log( "select[name="+id+"] 값 = " ,  $("select[name="+id+"]").val() );
+            }
+        },
+    }
+    ui.popsel.init();
+</script>
+</body>
+
+</html>

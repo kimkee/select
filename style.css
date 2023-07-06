@@ -73,9 +73,9 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select .pbt .bots{}
 .pop-select .pbt .btn{font-size: 14px;}
 .pop-select.on .pbd{transform: translateY(0%);}
-.pop-select .slide{height: 180px;position: relative;}
+.pop-select .slide{height: 181px;position: relative;}
 .pop-select .slide::before,
-.pop-select .slide::after{height: 1px;background: #eeeeee;left: 0;right: 0;position: absolute;content:"";}
+.pop-select .slide::after{height: 1rem;background: #eeeeee;left: 0;right: 0;position: absolute;content:"";}
 .pop-select .slide::before{top: 60px;}
 .pop-select .slide::after{bottom: 60px;}
 .pop-select .list{padding: 0px 0px 0px 0px;padding-bottom: calc(20px + env(safe-area-inset-bottom));width: 100%;}

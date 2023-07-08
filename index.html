@@ -69,7 +69,8 @@
 
                 document.addEventListener("click", function(e) {
                     const target = e.target;
-                    if (target.matches(".select-pop .btsel:not(.open)")) {
+                    
+                    if (target.closest(".select-pop .btsel:not(.open)")) {
                         const pop = target.closest(".select-pop");
                         const name = pop.querySelector(".slist").getAttribute("name");
                         const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "선택해주세요.";
@@ -96,7 +97,7 @@
                 
                 document.addEventListener("click", function(e) {
                     const target = e.target;
-                    if (target.matches(".pop-select .btsbot .btcom")) {
+                    if (target.closest(".pop-select .btsbot .btcom")) {
                         const sel = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
                         const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
                         const name = target.closest(".pop-select").getAttribute("data-selt-pop");
@@ -128,7 +129,7 @@
 
                 document.addEventListener("click", function(e) {
                     const target = e.target;
-                    if (target.matches(".pop-select .btn-sel-close")) {
+                    if (target.closest(".pop-select .btn-sel-close")) {
                         _this.close();    
                     }
                 });

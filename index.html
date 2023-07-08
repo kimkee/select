@@ -16,28 +16,28 @@
 <body class="body">
 <span class="select-pop a">
     <select class="slist" name="select_pop_1">
-        <option value="value_0">옵션 선택 스와이프</option>
-        <option value="value_1">1번째 선택</option>
-        <option value="value_2" disabled>2번째 비활성</option>
-        <option value="value_3">3번째 선택</option>
-        <option value="value_4">4번째 선택</option>
-        <option value="value_5">5번째 선택</option>
-        <option value="value_6">6번째 선택</option>
-        <option value="value_7">7번째 선택</option>
-        <option value="value_8">8번째 선택</option>
+        <option value="val_0">옵션 선택</option>
+        <option value="val_1">1번째 선택</option>
+        <option value="val_2" disabled>2번째 비활성</option>
+        <option value="val_3">3번째 선택</option>
+        <option value="val_4">4번째 선택</option>
+        <option value="val_5">5번째 선택</option>
+        <option value="val_6">6번째 선택</option>
+        <option value="val_7">7번째 선택</option>
+        <option value="val_8">8번째 선택</option>
     </select>
 </span>
 <span class="select-pop a">
     <select class="slist" name="select_pop_2">
-        <option value="value_0">옵션 선택 스와이프</option>
-        <option value="value_1">A번째 선택</option>
-        <option value="value_2">B번째 선택</option>
-        <option value="value_3">C번째 선택</option>
-        <option value="value_4">D번째 선택</option>
-        <option value="value_5" disabled>E번째 선택</option>
-        <option value="value_6">F번째 선택</option>
-        <option value="value_7">G번째 선택</option>
-        <option value="value_8">H번째 선택</option>
+        <option value="val_0">옵션 선택</option>
+        <option value="val_A">A번째 선택</option>
+        <option value="val_B">B번째 선택</option>
+        <option value="val_C">C번째 선택</option>
+        <option value="val_D">D번째 선택</option>
+        <option value="val_E" disabled>E번째 선택</option>
+        <option value="val_F">F번째 선택</option>
+        <option value="val_G">G번째 선택</option>
+        <option value="val_H">H번째 선택</option>
     </select>
 </span>
 <script>
@@ -93,7 +93,27 @@
                 //     $(".ui-sorts").removeClass("open");
                 // });
 
-                $(document).on("click",".pop-select .btsbot .btcom",function(e){
+                
+                document.addEventListener("click", function(e) {
+                    const target = e.target;
+                    if (target.matches(".pop-select .btsbot .btcom")) {
+                        const sel = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
+                        const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
+                        const name = target.closest(".pop-select").getAttribute("data-selt-pop");
+                        const tit = document.querySelector("select[name='" + name + "']").getAttribute("data-select-title");
+                        
+                        // console.log(name, sel);
+                        document.querySelector("select[name='" + name + "'] > option[value='" + sel + "']").selected = true;
+                        document.querySelector("select[name='" + name + "']").value = sel;
+                        document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
+                        document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
+                        document.querySelector("select[name='" + name + "']").dispatchEvent(new Event("change"));
+                        _this.close();
+                    }
+                });
+
+                
+                /* $(document).on("click",".pop-select .btsbot .btcom",function(e){
                     var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");
                     var txt = $(this).closest(".pop-select").find(".swiper-slide-active .bt").text();
                     var name =  $(this).closest(".pop-select").data("selt-pop");
@@ -104,11 +124,19 @@
                     $("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
                     $("select[name='"+name+"']").trigger("change");
                     _this.close();
-                });
+                }); */
 
+                document.addEventListener("click", function(e) {
+                    const target = e.target;
+                    if (target.matches(".pop-select .btn-sel-close")) {
+                        _this.close();    
+                    }
+                });
+                /* 
                 $(document).on("click",".pop-select .btn-sel-close",function(){
                     _this.close();
                 });
+                */
             },
             sld:{ // 
                 els:".pop-select .swiper-container",
@@ -136,7 +164,13 @@
                     loop: false
                 },
                 using: function() {
-                    if( $(this.els).find(".swiper-slide").length <= 1 ) {
+                    /*                  
+                    if( $(".pop-select .swiper-container").find(".swiper-slide").length <= 1 ) {
+                        this.opt.loop = false;
+                    }
+                    this.slide = new Swiper(this.els, this.opt); */
+
+                    if( document.querySelectorAll(this.els +" .swiper-slide").length <= 1) {
                         this.opt.loop = false;
                     }
                     this.slide = new Swiper(this.els, this.opt);

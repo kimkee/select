@@ -50,24 +50,48 @@
             evt:function(){
                 var _this = this;
 
+
+                document.addEventListener("click", function(e) {
+                    const target = e.target;
+                    console.log(target);
+                    if ( target.classList.contains("pop-select") && !target.closest(".pop-select .pbd") )  {   
+                        _this.close();
+                    }
+                });
+                /*
                 $(document).on("click",".pop-select",function(e) {
-                    // console.log(e.target);
+                    console.log(e.target);
                     if ( !$(e.target).closest(".pop-select .pbd").length ) {
                         _this.close();
                     }
                 });
+                */
 
-                $(document).on("click",".select-pop .btsel:not(.open)",function(){
-                    var $pop = $(this).closest(".select-pop");
-                    var name = $pop.find(".slist").attr("name");
-                    var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
-                    var sel =  $pop.find(".slist").val();
-                    var list = [];
-                    
-                    // console.log(name,tit,list,sel);
-                    _this.open(name,tit,list,sel);
-                    $(".ui-sorts").removeClass("open");
+                document.addEventListener("click", function(e) {
+                    const target = e.target;
+                    if (target.matches(".select-pop .btsel:not(.open)")) {
+                        const pop = target.closest(".select-pop");
+                        const name = pop.querySelector(".slist").getAttribute("name");
+                        const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "선택해주세요.";
+                        const sel = pop.querySelector(".slist").value;
+                        const list = [];
+                        // console.log(name, tit, list, sel);
+                        _this.open(name, tit, list, sel);
+                    }
                 });
+
+                // $(document).on("click",".select-pop .btsel:not(.open)",function(){
+
+                //     var $pop = $(this).closest(".select-pop");
+                //     var name = $pop.find(".slist").attr("name");
+                //     var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
+                //     var sel =  $pop.find(".slist").val();
+                //     var list = [];
+                    
+                //     // console.log(name,tit,list,sel);
+                //     _this.open(name,tit,list,sel);
+                //     $(".ui-sorts").removeClass("open");
+                // });
 
                 $(document).on("click",".pop-select .btsbot .btcom",function(e){
                     var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");

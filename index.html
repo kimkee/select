@@ -177,6 +177,7 @@
                 }
             },
             set:function(update){
+                /*
                 $(".select-pop").each(function(){
                     if( !$(this).find(".btsel").length ) {
                         $(this).prepend('<button class="btsel" type="button"></button>');
@@ -207,6 +208,41 @@
                         $btsel.prop("disabled",false);
                     }
                 });
+                */
+                document.querySelectorAll(".select-pop").forEach(function(selectPop) {
+                    if (!selectPop.querySelector(".btsel")) {
+                        selectPop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
+                    }
+                    if (!selectPop.classList.contains("set")) {
+                        selectPop.classList.add("set");
+                    }
+                    var btsel = selectPop.querySelector(".btsel");
+                    btsel.classList.add("is-tit");
+                    var selectedOption = selectPop.querySelector(".slist option:checked");
+                    var txt = selectedOption ? selectedOption.textContent : "";
+                    var dis = selectPop.querySelector(".slist").disabled;
+                    var list = [];
+                    selectPop.querySelectorAll(".slist option").forEach(function(option) {
+                        var isDis = option.disabled;
+                        list.push({ v: option.value, t: option.textContent, d: isDis });
+                    });
+                    // console.log(list, txt, dis);
+                    var tit;
+                    if (update === "update") {
+                        tit = selectedOption ? selectedOption.textContent : "";
+                    } else {
+                        tit = selectPop.querySelector(".slist").getAttribute("data-select-title") || (selectedOption ? selectedOption.textContent : "");
+                    }
+                    btsel.innerHTML = '<i class="txt">' + txt + '</i>';
+
+                    if (dis) {
+                        btsel.disabled = true;
+                    } else {
+                        btsel.disabled = false;
+                    }
+                });
+
+
             },
             open:function(name,tit,list,sel){
                 // console.log(name,tit,list,sel);

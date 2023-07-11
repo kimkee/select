@@ -29,6 +29,22 @@ address,em,i{font-style:normal; }
 *{outline-color: rgb(0 114 255 / 20%);}
 ::-ms-clear{display: none; }
 
+:root{
+	--safe-top: 0px;
+	--safe-bottom: 0px;
+}
+@supports (--safe-top: constant(safe-area-inset-top)){
+	:root{
+		--safe-top: constant(safe-area-inset-top);
+		--safe-bottom: constant(safe-area-inset-bottom);
+	}
+}
+@supports (--safe-top: env(safe-area-inset-top)){
+	:root{
+		--safe-top: env(safe-area-inset-top);
+		--safe-bottom: env(safe-area-inset-bottom);
+	}
+}
 
 html{font-size:1px;}
 

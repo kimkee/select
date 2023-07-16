@@ -16,17 +16,17 @@ I don't like using jQuery, so I changed it to javascript
 
 ``` html
 <span class="select-pop">
-	<select class="slist" name="select_pop_1">
-		<option value="val_0">옵션 선택</option>
-		<option value="val_1" selected>1번째 선택</option>
-		<option value="val_2">2번째 선택</option>
-		<option value="val_3">3번째 선택</option>
-		<option value="val_4">4번째 선택</option>
-		<option value="val_5">5번째 선택</option>
-		<option value="val_6">6번째 선택</option>
-		<option value="val_7" disabled>7번째 비활성</option>
-		<option value="val_8">8번째 선택</option>
-	</select>
+    <select class="slist" name="select_pop_1">
+        <option value="val_0">옵션 선택</option>
+        <option value="val_1" selected>1번째 선택</option>
+        <option value="val_2">2번째 선택</option>
+        <option value="val_3">3번째 선택</option>
+        <option value="val_4">4번째 선택</option>
+        <option value="val_5">5번째 선택</option>
+        <option value="val_6">6번째 선택</option>
+        <option value="val_7" disabled>7번째 비활성</option>
+        <option value="val_8">8번째 선택</option>
+    </select>
 </span>
 ```
 

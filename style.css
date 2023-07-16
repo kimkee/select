@@ -74,8 +74,8 @@ button{cursor:pointer;background: none;border: none;}
 .select-pop.a .slist>li input{}
 .select-pop.a .slist>li .txt{}
 .select-pop.a .btsel.on .tit{display:none;}
-.pop-select{display:none;position:fixed;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0);outline:none;transition: background-color 0.4s;}
-.pop-select.on{display:block;background-color: rgba(0,0,0,0.5);}
+.pop-select{display: block;position:fixed;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0);outline:none;transition: background-color 0.4s;}
+.pop-select.on{/* display:block; */background-color: rgba(0,0,0,0.5);}
 .pop-select{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px 0px 0px;}
 .pop-select::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
 .pop-select .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;background:#ffffff;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;width: calc(100% - 0px);margin-bottom: 0px;overflow: initial;border-radius: 16px 16px 0px 0px;box-shadow: 0 -1px 9px 0 rgba(0,0,0,0.3);}

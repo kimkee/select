@@ -148,31 +148,28 @@
                 },
                 set:function(update){
 
-                    document.querySelectorAll(".select-pop").forEach(function(selectPop) {
-                        if (!selectPop.querySelector(".btsel")) {
-                            selectPop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
+                    document.querySelectorAll(".select-pop").forEach(function(pop) {
+                        if (!pop.querySelector(".btsel")) {
+                            pop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
                         }
-                        if (!selectPop.classList.contains("set")) {
-                            selectPop.classList.add("set");
+                        if (!pop.classList.contains("set")) {
+                            pop.classList.add("set");
                         }
-                        const btsel = selectPop.querySelector(".btsel");
+                        const btsel = pop.querySelector(".btsel");
                         btsel.classList.add("is-tit");
-                        const selectedOption = selectPop.querySelector(".slist option:checked");
+                        const selectedOption = pop.querySelector(".slist option:checked");
                         const txt = selectedOption ? selectedOption.textContent : "";
-                        const dis = selectPop.querySelector(".slist").disabled;
+                        const dis = pop.querySelector(".slist").disabled;
                         const list = [];
-                        selectPop.querySelectorAll(".slist option").forEach(function(option) {
+                        pop.querySelectorAll(".slist option").forEach(function(option) {
                             const isDis = option.disabled;
                             list.push({ v: option.value, t: option.textContent, d: isDis });
                         });
                         // console.log(list, txt, dis);
 
                         btsel.innerHTML = '<i class="txt">' + txt + '</i>';
-                        if (dis) {
-                            btsel.disabled = true;
-                        } else {
-                            btsel.disabled = false;
-                        }
+                        btsel.disabled = dis ? true : false;
+                        
                     });
 
 
@@ -185,33 +182,33 @@
                         return;
                     }
 
-                    list = Array.from(document.querySelectorAll("[name='" + name + "'] option"), (option) => {
-                        return { v: option.value, t: option.textContent, d: option.disabled };
+                    document.querySelectorAll("[name='" + name + "'] option").forEach( option => {
+                        list.push( { v: option.value, t: option.textContent, d: option.disabled } );
                     });
+                    console.log(list);
+                    
+                    const blist = list.map( (li, i) => {
+                        const dis = list[i].d == true ? "disabled" : null;
+                        return `<li class="swiper-slide ${dis}"><span class="bt ${dis}" ${dis} value="${list[i].v}">${list[i].t}</span></li>`;
+                    }).join("");
 
-                    let blist="";
-                    for(let i in list) {
-                        // console.log(list[i].d);
-                        let dis = list[i].d == true ? "disabled" : null;
-                        blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
-                    }
                     const lyPop =
-                    '<article class="pop-select" data-selt-pop="'+name+'">' +
-                    '	<div class="pbd">' +
-                    '		<div class="phd"><h3 class="ptit">'+tit+'</h3></div>' +
-                    '		<button type="button" class="btn-sel-close">닫기</button>' +
-                    '		<div class="pct">' +
-                    '			<main class="poptents">' +
-                    '				<div class="swiper-container slide">' +
-                    '					<ul class="swiper-wrapper list">'+blist+'</ul>' +
-                    '				</div>' +
-                    '				<div class="btsbot btn-set">' +
-                    '					<button type="button" class="btn a lg btcom">완료</button>' +
-                    '				</div>' +
-                    '			</main>' +
-                    '		</div>' +
-                    '	</div>' +
-                    '</article>';
+                    `<article class="pop-select" data-selt-pop="${name}">
+                    	<div class="pbd">
+                    		<div class="phd"><h3 class="ptit">${tit}</h3></div>
+                    		<button type="button" class="btn-sel-close">닫기</button>
+                    		<div class="pct">
+                    			<main class="poptents">
+                    				<div class="swiper-container slide">
+                    					<ul class="swiper-wrapper list">${blist}</ul>
+                    				</div>
+                    				<div class="btsbot btn-set">
+                    					<button type="button" class="btn a lg btcom">완료</button>
+                    				</div>
+                    			</main>
+                    		</div>
+                    	</div>
+                    </article>`;
                     
                     
                     document.body.insertAdjacentHTML("beforeend", lyPop);
@@ -255,10 +252,7 @@
                     const id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
 
                     document.querySelector('.pop-select')?.classList.remove("on")
-                    document.querySelector('.pop-select').addEventListener("transitionend", e =>{
-                        document.querySelector('.pop-select').remove();
-
-                    });
+                    document.querySelector('.pop-select').addEventListener("transitionend", pop => pop.target.remove() );
                     const select = document.querySelector("select[name='" + id + "']");
                     const btsel = select.closest(".select-pop").querySelector(".btsel");
                     btsel.classList.remove("open");

@@ -81,7 +81,7 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;background:#ffffff;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;width: calc(100% - 0px);margin-bottom: 0px;overflow: initial;border-radius: 16px 16px 0px 0px;box-shadow: 0 -1px 9px 0 rgba(0,0,0,0.3);}
 .pop-select .phd{position: relative;height: 55px;display: none;}
 .pop-select .phd>.in{ position:relative;}
-.pop-select .phd .ptit{font-size: 17rem;text-align: center;padding: 21px 40px 15px 40px;font-weight: 700;}
+.pop-select .phd .ptit{font-size: 17rem;text-align: center;padding: 21px 40px 15px 40px;font-weight: 700;color: #ddd;}
 .pop-select .phd button.close{ background: url(../img/cm/icon_bottom_close@2x.png)}
 .pop-select .pct{overflow: hidden;}
 .pop-select .pct .poptents{padding: 13px 20px 20px 20px;padding-bottom: calc(20px + var(--safe-bottom));}

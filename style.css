@@ -67,8 +67,8 @@ button{cursor:pointer;background: none;border: none;}
 .select-pop .btsel.is-tit .tit{display: inline;}
 .select-pop .btsel.is-tit .txt{}
 .select-pop .btsel .txt{}
-.select-pop.set .slist{position: absolute;left: -999em;display: none;}
-.select-pop .slist{height: 48px;width: 100%;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(../img/common/select.png) no-repeat right 11px top 17px #ffffff;background-size: 13px auto;position:relative;border: 1px solid #cdcbce;border-radius: 4px;margin:0;overflow:hidden;padding: 7px 35px 8px 12px;text-overflow:ellipsis;white-space:nowrap;font-size: 14px;color: #000000;max-width: 100%;outline: none;}
+.select-pop.set .slist{position: absolute;left: -999em;}
+.select-pop .slist{height: 48px;width: 100%;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(./img/select.png) no-repeat right 11px top 17px #ffffff;background-size: 13px auto;position:relative;border: 1px solid #cdcbce;border-radius: 4px;margin:0;overflow:hidden;padding: 7px 35px 8px 12px;text-overflow:ellipsis;white-space:nowrap;font-size: 14px;color: #000000;max-width: 100%;outline: none;}
 .select-pop .slist>li{}
 .select-pop .slist>li .lb{}
 .select-pop .slist>li input{}
@@ -80,9 +80,7 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
 .pop-select .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;background:#ffffff;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;width: calc(100% - 0px);margin-bottom: 0px;overflow: initial;border-radius: 16px 16px 0px 0px;box-shadow: 0 -1px 9px 0 rgba(0,0,0,0.3);}
 .pop-select .phd{position: relative;height: 55px;display: none;}
-.pop-select .phd>.in{ position:relative;}
 .pop-select .phd .ptit{font-size: 17rem;text-align: center;padding: 21px 40px 15px 40px;font-weight: 700;color: #ddd;}
-.pop-select .phd button.close{ background: url(../img/cm/icon_bottom_close@2x.png)}
 .pop-select .pct{overflow: hidden;}
 .pop-select .pct .poptents{padding: 13px 20px 20px 20px;padding-bottom: calc(20px + var(--safe-bottom));}
 .pop-select .pbt{ min-height: auto;}

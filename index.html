@@ -11,7 +11,7 @@
 </head>
 <body class="body">
     <span class="select-pop">
-        <select class="slist" name="select_pop_1">
+        <select class="slist" name="select_pop_1" data-select-title="">
             <option value="val_0">옵션 선택</option>
             <option value="val_1">1번째 선택</option>
             <option value="val_2">2번째 선택</option>
@@ -24,7 +24,7 @@
         </select>
     </span>
     <span class="select-pop">
-        <select class="slist" name="select_pop_2">
+        <select class="slist" name="select_pop_2" data-select-title="옵션을 선택해 주세요">
             <option value="val_0">옵션 선택</option>
             <option value="val_A">A번째 선택</option>
             <option value="val_B">B번째 선택</option>
@@ -81,7 +81,7 @@
                         if (target.closest(".select-pop .btsel:not(.open)")) {
                             const pop = target.closest(".select-pop");
                             const name = pop.querySelector(".slist").getAttribute("name");
-                            const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "선택해주세요.";
+                            const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "";
                             const sel = pop.querySelector(".slist").value;
                             const list = [];
                             // console.log(name, tit, list, sel);
@@ -195,7 +195,7 @@
                     const lyPop =
                     `<article class="pop-select" data-selt-pop="${name}">
                     	<div class="pbd">
-                    		<div class="phd"><h3 class="ptit">${tit}</h3></div>
+                    		<div class="phd ${tit ? 'is-tit':''}" ><h3 class="ptit">${tit}</h3></div>
                     		<button type="button" class="btn-sel-close">닫기</button>
                     		<div class="pct">
                     			<main class="poptents">

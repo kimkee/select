@@ -37,355 +37,374 @@
         </select>
     </span>
 
+    <div>
+        <button type="button" class="btn sm" onclick="test_select_1();">B번째 선택</button>
+        <button type="button" class="btn sm" onclick="test_select_2();">비활성화</button>
+        <button type="button" class="btn sm" onclick="test_select_3();">활성화</button>
+    </div>
+    <script>
+        const test_select_1 = ()=> {
+            document.querySelector("select[name='select_pop_2']").value = "val_B";
+            ui.popsel.set();
+        }
+        const test_select_2 = ()=> {
+            document.querySelector("select[name='select_pop_2']").disabled = true;
+            ui.popsel.set();
+        }
+        const test_select_3 = ()=> {
+            document.querySelector("select[name='select_pop_2']").disabled = false;
+            ui.popsel.set();
+        }
+    </script>
 
-<script>
-    const ui = {
-        popsel:{ // 셀렉트 스와이프
-            init:function(){
-                this.evt();
-                this.set();
-            },
-            evt:function(){
-                var _this = this;
-
-
-                document.addEventListener("click", function(e) {
-                    const target = e.target;
-                    if ( target.classList.contains("pop-select") && !target.closest(".pop-select .pbd") )  {   
-                        _this.close();
-                    }
-                });
-                /*
-                $(document).on("click",".pop-select",function(e) {
-                    console.log(e.target);
-                    if ( !$(e.target).closest(".pop-select .pbd").length ) {
-                        _this.close();
-                    }
-                });
-                */
-
-                document.addEventListener("click", function(e) {
-                    const target = e.target;
-                    
-                    if (target.closest(".select-pop .btsel:not(.open)")) {
-                        const pop = target.closest(".select-pop");
-                        const name = pop.querySelector(".slist").getAttribute("name");
-                        const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "선택해주세요.";
-                        const sel = pop.querySelector(".slist").value;
-                        const list = [];
-                        // console.log(name, tit, list, sel);
-                        _this.open(name, tit, list, sel);
-                    }
-                });
-
-                // $(document).on("click",".select-pop .btsel:not(.open)",function(){
-
-                //     var $pop = $(this).closest(".select-pop");
-                //     var name = $pop.find(".slist").attr("name");
-                //     var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
-                //     var sel =  $pop.find(".slist").val();
-                //     var list = [];
-                    
-                //     // console.log(name,tit,list,sel);
-                //     _this.open(name,tit,list,sel);
-                //     $(".ui-sorts").removeClass("open");
-                // });
-
-                
-                document.addEventListener("click", function(e) {
-                    const target = e.target;
-                    if (target.closest(".pop-select .btsbot .btcom")) {
-                        const sel = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
-                        const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
-                        const name = target.closest(".pop-select").getAttribute("data-selt-pop");
-                        const tit = document.querySelector("select[name='" + name + "']").getAttribute("data-select-title");
-                        
-                        // console.log(name, sel);
-                        document.querySelector("select[name='" + name + "'] > option[value='" + sel + "']").selected = true;
-                        document.querySelector("select[name='" + name + "']").value = sel;
-                        document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
-                        document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
-                        document.querySelector("select[name='" + name + "']").dispatchEvent(new Event("change"));
-                        _this.close();
-                    }
-                });
-
-                
-                /* $(document).on("click",".pop-select .btsbot .btcom",function(e){
-                    var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");
-                    var txt = $(this).closest(".pop-select").find(".swiper-slide-active .bt").text();
-                    var name =  $(this).closest(".pop-select").data("selt-pop");
-                    var tit = $("select[name='"+name+"']").data("select-title");
-                    // console.log(name,sel);
-                    $("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
-                    $("select[name='"+name+"']").val(sel).prop("selected",true);
-                    $("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
-                    $("select[name='"+name+"']").trigger("change");
-                    _this.close();
-                }); */
-
-                document.addEventListener("click", function(e) {
-                    const target = e.target;
-                    if (target.closest(".pop-select .btn-sel-close")) {
-                        _this.close();    
-                    }
-                });
-                /* 
-                $(document).on("click",".pop-select .btn-sel-close",function(){
-                    _this.close();
-                });
-                */
-            },
-            sld:{ // 
-                els:".pop-select .swiper-container",
-                opt: {
-                    // freeMode: true,
-                    // freeModeSticky:true,
-                    centeredSlides:true,
-                    direction:"vertical",
-                    slidesPerView: 3,
-                    freeMode: {
-                        enabled: true,
-                        sticky: true,
-                        momentumRatio: 0.2,
-                    },
-                    // mousewheel: {
-                    // 	invert: false,
-                    // 	sensitivity: 0.2,
-                    // },
-                    speed: 100,  // 300
-                    freeModeMomentumRatio: 1.2,  // 1
-                    observer: true,
-                    observeParents: true,
-                    spaceBetween:0,
-                    watchOverflow:true,
-                    loop: false
+    <script>
+        const ui = {
+            popsel:{ // 셀렉트 스와이프
+                init:function(){
+                    this.evt();
+                    this.set();
                 },
-                using: function() {
-                    /*                  
-                    if( $(".pop-select .swiper-container").find(".swiper-slide").length <= 1 ) {
-                        this.opt.loop = false;
-                    }
-                    this.slide = new Swiper(this.els, this.opt); */
+                evt:function(){
+                    var _this = this;
 
-                    if( document.querySelectorAll(this.els +" .swiper-slide").length <= 1) {
-                        this.opt.loop = false;
+
+                    document.addEventListener("click", function(e) {
+                        const target = e.target;
+                        if ( target.classList.contains("pop-select") && !target.closest(".pop-select .pbd") )  {   
+                            _this.close();
+                        }
+                    });
+                    /*
+                    $(document).on("click",".pop-select",function(e) {
+                        console.log(e.target);
+                        if ( !$(e.target).closest(".pop-select .pbd").length ) {
+                            _this.close();
+                        }
+                    });
+                    */
+
+                    document.addEventListener("click", function(e) {
+                        const target = e.target;
+                        
+                        if (target.closest(".select-pop .btsel:not(.open)")) {
+                            const pop = target.closest(".select-pop");
+                            const name = pop.querySelector(".slist").getAttribute("name");
+                            const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "선택해주세요.";
+                            const sel = pop.querySelector(".slist").value;
+                            const list = [];
+                            // console.log(name, tit, list, sel);
+                            _this.open(name, tit, list, sel);
+                        }
+                    });
+
+                    // $(document).on("click",".select-pop .btsel:not(.open)",function(){
+
+                    //     var $pop = $(this).closest(".select-pop");
+                    //     var name = $pop.find(".slist").attr("name");
+                    //     var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
+                    //     var sel =  $pop.find(".slist").val();
+                    //     var list = [];
+                        
+                    //     // console.log(name,tit,list,sel);
+                    //     _this.open(name,tit,list,sel);
+                    //     $(".ui-sorts").removeClass("open");
+                    // });
+
+                    
+                    document.addEventListener("click", function(e) {
+                        const target = e.target;
+                        if (target.closest(".pop-select .btsbot .btcom")) {
+                            const sel = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
+                            const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
+                            const name = target.closest(".pop-select").getAttribute("data-selt-pop");
+                            const tit = document.querySelector("select[name='" + name + "']").getAttribute("data-select-title");
+                            
+                            // console.log(name, sel);
+                            document.querySelector("select[name='" + name + "'] > option[value='" + sel + "']").selected = true;
+                            document.querySelector("select[name='" + name + "']").value = sel;
+                            document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
+                            document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
+                            document.querySelector("select[name='" + name + "']").dispatchEvent(new Event("change"));
+                            _this.close();
+                        }
+                    });
+
+                    
+                    /* $(document).on("click",".pop-select .btsbot .btcom",function(e){
+                        var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");
+                        var txt = $(this).closest(".pop-select").find(".swiper-slide-active .bt").text();
+                        var name =  $(this).closest(".pop-select").data("selt-pop");
+                        var tit = $("select[name='"+name+"']").data("select-title");
+                        // console.log(name,sel);
+                        $("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
+                        $("select[name='"+name+"']").val(sel).prop("selected",true);
+                        $("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
+                        $("select[name='"+name+"']").trigger("change");
+                        _this.close();
+                    }); */
+
+                    document.addEventListener("click", function(e) {
+                        const target = e.target;
+                        if (target.closest(".pop-select .btn-sel-close")) {
+                            _this.close();    
+                        }
+                    });
+                    /* 
+                    $(document).on("click",".pop-select .btn-sel-close",function(){
+                        _this.close();
+                    });
+                    */
+                },
+                sld:{ // 
+                    els:".pop-select .swiper-container",
+                    opt: {
+                        // freeMode: true,
+                        // freeModeSticky:true,
+                        centeredSlides:true,
+                        direction:"vertical",
+                        slidesPerView: 3,
+                        freeMode: {
+                            enabled: true,
+                            sticky: true,
+                            momentumRatio: 0.2,
+                        },
+                        // mousewheel: {
+                        // 	invert: false,
+                        // 	sensitivity: 0.2,
+                        // },
+                        speed: 100,  // 300
+                        freeModeMomentumRatio: 1.2,  // 1
+                        observer: true,
+                        observeParents: true,
+                        spaceBetween:0,
+                        watchOverflow:true,
+                        loop: false
+                    },
+                    using: function() {
+                        /*                  
+                        if( $(".pop-select .swiper-container").find(".swiper-slide").length <= 1 ) {
+                            this.opt.loop = false;
+                        }
+                        this.slide = new Swiper(this.els, this.opt); */
+
+                        if( document.querySelectorAll(this.els +" .swiper-slide").length <= 1) {
+                            this.opt.loop = false;
+                        }
+                        this.slide = new Swiper(this.els, this.opt);
                     }
-                    this.slide = new Swiper(this.els, this.opt);
-                }
-            },
-            set:function(update){
-                /*
-                $(".select-pop").each(function(){
-                    if( !$(this).find(".btsel").length ) {
-                        $(this).prepend('<button class="btsel" type="button"></button>');
+                },
+                set:function(update){
+                    /*
+                    $(".select-pop").each(function(){
+                        if( !$(this).find(".btsel").length ) {
+                            $(this).prepend('<button class="btsel" type="button"></button>');
+                        }
+                        if( !$(this).is(".set").length ) {
+                            $(this).addClass("set");
+                        }
+                        var $btsel = $(this).find(".btsel");
+                        $btsel.addClass("is-tit");			
+                        var txt = $(this).find(".slist option:selected").text() ;
+                        var dis = $(this).find(".slist").prop("disabled");
+                        var list = [];
+                        $(this).find(".slist option").each(function(){
+                            var isDis = $(this).prop("disabled");
+                            list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+                        });
+                        // console.log(list ,txt ,dis);
+                        if (update == "update") {
+                            tit = $(this).find(".slist>option:selected").text();
+                        }else{
+                            tit = $(this).find(".slist").data("select-title")|| $(this).find(".slist>option:selected").text();
+                        }
+                        $btsel.html('<i class="txt">'+txt+'</i>');
+
+                        if( dis == true ) {
+                            $btsel.prop("disabled",true);
+                        }else{
+                            $btsel.prop("disabled",false);
+                        }
+                    });
+                    */
+                    document.querySelectorAll(".select-pop").forEach(function(selectPop) {
+                        if (!selectPop.querySelector(".btsel")) {
+                            selectPop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
+                        }
+                        if (!selectPop.classList.contains("set")) {
+                            selectPop.classList.add("set");
+                        }
+                        var btsel = selectPop.querySelector(".btsel");
+                        btsel.classList.add("is-tit");
+                        var selectedOption = selectPop.querySelector(".slist option:checked");
+                        var txt = selectedOption ? selectedOption.textContent : "";
+                        var dis = selectPop.querySelector(".slist").disabled;
+                        var list = [];
+                        selectPop.querySelectorAll(".slist option").forEach(function(option) {
+                            var isDis = option.disabled;
+                            list.push({ v: option.value, t: option.textContent, d: isDis });
+                        });
+                        // console.log(list, txt, dis);
+                        var tit;
+                        if (update === "update") {
+                            tit = selectedOption ? selectedOption.textContent : "";
+                        } else {
+                            tit = selectPop.querySelector(".slist").getAttribute("data-select-title") || (selectedOption ? selectedOption.textContent : "");
+                        }
+                        btsel.innerHTML = '<i class="txt">' + txt + '</i>';
+
+                        if (dis) {
+                            btsel.disabled = true;
+                        } else {
+                            btsel.disabled = false;
+                        }
+                    });
+
+
+                },
+                open:function(name,tit,list,sel){
+                    
+                    // $(".pop-select.on").remove();
+                    document.querySelectorAll('.pop-select.on').forEach( (pop)=>  pop.remove());
+
+                    // if ( $(".pop-select:visible").length ) { return; }
+                    if (document.querySelector('.pop-select:is(:visible)')) {
+                        return;
                     }
-                    if( !$(this).is(".set").length ) {
-                        $(this).addClass("set");
-                    }
-                    var $btsel = $(this).find(".btsel");
-                    $btsel.addClass("is-tit");			
-                    var txt = $(this).find(".slist option:selected").text() ;
-                    var dis = $(this).find(".slist").prop("disabled");
-                    var list = [];
-                    $(this).find(".slist option").each(function(){
+
+                    /* $("[name='"+name+"']").find("option").each(function(){
                         var isDis = $(this).prop("disabled");
                         list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+                    }); */
+                    list = Array.from(document.querySelectorAll("[name='" + name + "'] option"), (option) => {
+                        return { v: option.value, t: option.textContent, d: option.disabled };
                     });
-                    // console.log(list ,txt ,dis);
-                    if (update == "update") {
-                        tit = $(this).find(".slist>option:selected").text();
-                    }else{
-                        tit = $(this).find(".slist").data("select-title")|| $(this).find(".slist>option:selected").text();
-                    }
-                    $btsel.html('<i class="txt">'+txt+'</i>');
-
-                    if( dis == true ) {
-                        $btsel.prop("disabled",true);
-                    }else{
-                        $btsel.prop("disabled",false);
-                    }
-                });
-                */
-                document.querySelectorAll(".select-pop").forEach(function(selectPop) {
-                    if (!selectPop.querySelector(".btsel")) {
-                        selectPop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
-                    }
-                    if (!selectPop.classList.contains("set")) {
-                        selectPop.classList.add("set");
-                    }
-                    var btsel = selectPop.querySelector(".btsel");
-                    btsel.classList.add("is-tit");
-                    var selectedOption = selectPop.querySelector(".slist option:checked");
-                    var txt = selectedOption ? selectedOption.textContent : "";
-                    var dis = selectPop.querySelector(".slist").disabled;
-                    var list = [];
-                    selectPop.querySelectorAll(".slist option").forEach(function(option) {
-                        var isDis = option.disabled;
-                        list.push({ v: option.value, t: option.textContent, d: isDis });
-                    });
-                    // console.log(list, txt, dis);
-                    var tit;
-                    if (update === "update") {
-                        tit = selectedOption ? selectedOption.textContent : "";
-                    } else {
-                        tit = selectPop.querySelector(".slist").getAttribute("data-select-title") || (selectedOption ? selectedOption.textContent : "");
-                    }
-                    btsel.innerHTML = '<i class="txt">' + txt + '</i>';
-
-                    if (dis) {
-                        btsel.disabled = true;
-                    } else {
-                        btsel.disabled = false;
-                    }
-                });
 
 
-            },
-            open:function(name,tit,list,sel){
-                
-                // $(".pop-select.on").remove();
-                document.querySelectorAll('.pop-select.on').forEach( (pop)=>  pop.remove());
-
-                // if ( $(".pop-select:visible").length ) { return; }
-                if (document.querySelector('.pop-select:is(:visible)')) {
-                    return;
-                }
-
-                /* $("[name='"+name+"']").find("option").each(function(){
-                    var isDis = $(this).prop("disabled");
-                    list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
-                }); */
-                list = Array.from(document.querySelectorAll("[name='" + name + "'] option"), (option) => {
-                    return { v: option.value, t: option.textContent, d: option.disabled };
-                });
-
-
-                
-
-                let blist="";
-                for(let i in list) {
-                    // console.log(list[i].d);
-                    let dis;
-                    if (list[i].d == true) {
-                        dis = "disabled";
-                    }else{
-                        dis = "";
-                    }
-                    blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
-                }
-                const lyPop =
-                '<article class="pop-select" data-selt-pop="'+name+'">' +
-                '	<div class="pbd">' +
-                '		<div class="phd"><h3 class="ptit">'+tit+'</h3></div>' +
-                '		<button type="button" class="btn-sel-close">닫기</button>' +
-                '		<div class="pct">' +
-                '			<main class="poptents">' +
-                '				<div class="swiper-container slide">' +
-                '					<ul class="swiper-wrapper list">'+blist+'</ul>' +
-                '				</div>' +
-                '				<div class="btsbot btn-set">' +
-                '					<button type="button" class="btn a lg btcom">완료</button>' +
-                '				</div>' +
-                '			</main>' +
-                '		</div>' +
-                '	</div>' +
-                '</article>';
-                
-                
-                // $("body").append(lyPop);
-                document.body.insertAdjacentHTML("beforeend", lyPop);
-
-
-                this.sld.using();
-                
-
-                // $("[name='"+name+"']").closest(".select-pop").find(".btsel").addClass("open");
-                document.querySelector("[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.add("open");
-
-                
-                
-                const _this = this;
-                
-                // $(".pop-select").addClass("on").attr("tabindex","0").focus();
-                document.querySelector(".pop-select").classList.add("on");
-                document.querySelector(".pop-select").tabIndex = 0;
-                document.querySelector(".pop-select").focus();
-
-
-                console.log(name, sel);
-                // window.setTimeout(() => {
                     
-                //     $("[data-selt-pop='"+name+"'] .list .bt[value='"+sel+"']").addClass("active").closest("li").addClass("active");
-                // }, 100);
-                document.querySelector("[data-selt-pop='" + name + "'] .list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
 
-
-                /* var activeIdx = $("[data-selt-pop='"+name+"'] .list>li.active").index();
-                _this.sld.slide.slideTo(activeIdx); */
-                
-                const ul = document.querySelector("[data-selt-pop='" + name + "']  .list");
-                const li = ul.querySelectorAll("li");
-                const activeIdx = Array.from(li).indexOf(ul.querySelector("li.active"));
-                console.log(activeIdx);
-
-                _this.sld.slide.slideTo(activeIdx);
-
-
-
-                _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
-                    // var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
-                    const isActDis = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
-                    // console.log("END" , isActDis);
-                    if (isActDis == true) {
-                        // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",true);
-                        document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = true );
-
-                    }else{
-                        // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",false);
-                        document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = false );
+                    let blist="";
+                    for(let i in list) {
+                        // console.log(list[i].d);
+                        let dis;
+                        if (list[i].d == true) {
+                            dis = "disabled";
+                        }else{
+                            dis = "";
+                        }
+                        blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
                     }
-                });
+                    const lyPop =
+                    '<article class="pop-select" data-selt-pop="'+name+'">' +
+                    '	<div class="pbd">' +
+                    '		<div class="phd"><h3 class="ptit">'+tit+'</h3></div>' +
+                    '		<button type="button" class="btn-sel-close">닫기</button>' +
+                    '		<div class="pct">' +
+                    '			<main class="poptents">' +
+                    '				<div class="swiper-container slide">' +
+                    '					<ul class="swiper-wrapper list">'+blist+'</ul>' +
+                    '				</div>' +
+                    '				<div class="btsbot btn-set">' +
+                    '					<button type="button" class="btn a lg btcom">완료</button>' +
+                    '				</div>' +
+                    '			</main>' +
+                    '		</div>' +
+                    '	</div>' +
+                    '</article>';
+                    
+                    
+                    // $("body").append(lyPop);
+                    document.body.insertAdjacentHTML("beforeend", lyPop);
 
-                // ui.lock.using(true);
-                document.body.classList.add("is-pop-select");
 
+                    this.sld.using();
+                    
+
+                    // $("[name='"+name+"']").closest(".select-pop").find(".btsel").addClass("open");
+                    document.querySelector("[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.add("open");
+
+                    
+                    
+                    const _this = this;
+                    
+                    // $(".pop-select").addClass("on").attr("tabindex","0").focus();
+                    document.querySelector(".pop-select").classList.add("on");
+                    document.querySelector(".pop-select").tabIndex = 0;
+                    document.querySelector(".pop-select").focus();
+
+
+                    console.log(name, sel);
+                    // window.setTimeout(() => {
+                        
+                    //     $("[data-selt-pop='"+name+"'] .list .bt[value='"+sel+"']").addClass("active").closest("li").addClass("active");
+                    // }, 100);
+                    document.querySelector("[data-selt-pop='" + name + "'] .list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
+
+
+                    /* var activeIdx = $("[data-selt-pop='"+name+"'] .list>li.active").index();
+                    _this.sld.slide.slideTo(activeIdx); */
+                    
+                    const ul = document.querySelector("[data-selt-pop='" + name + "']  .list");
+                    const li = ul.querySelectorAll("li");
+                    const activeIdx = Array.from(li).indexOf(ul.querySelector("li.active"));
+                    console.log(activeIdx);
+
+                    _this.sld.slide.slideTo(activeIdx);
+
+
+
+                    _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
+                        // var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
+                        const isActDis = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
+                        // console.log("END" , isActDis);
+                        if (isActDis == true) {
+                            // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",true);
+                            document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = true );
+
+                        }else{
+                            // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",false);
+                            document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = false );
+                        }
+                    });
+
+                    // ui.lock.using(true);
+                    document.body.classList.add("is-pop-select");
+
+                },
+                close:function(){
+                    // var id = $(".pop-select.on").data("selt-pop");
+                    var id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
+
+
+
+                    /* $(".pop-select").removeClass("on").fadeOut(100,function(){
+                        $(this).remove();
+                        // ui.lock.using(false);
+                    }); */
+
+
+                    document.querySelector('.pop-select')?.classList.remove("on")
+                    document.querySelector('.pop-select').addEventListener("transitionend", e =>{
+                        document.querySelector('.pop-select').remove();
+
+                    })
+
+
+
+                    // $("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open").focus();
+                    const select = document.querySelector("select[name='" + id + "']");
+                    const btsel = select.closest(".select-pop").querySelector(".btsel");
+                    btsel.classList.remove("open");
+                    btsel.focus();
+
+
+
+                    document.body.classList.remove("is-pop-select");
+                    console.log( "select[name="+id+"] 값 = " ,  select.value );
+                }
             },
-            close:function(){
-                // var id = $(".pop-select.on").data("selt-pop");
-                var id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
-
-
-
-                /* $(".pop-select").removeClass("on").fadeOut(100,function(){
-                    $(this).remove();
-                    // ui.lock.using(false);
-                }); */
-
-
-                document.querySelector('.pop-select')?.classList.remove("on")
-                document.querySelector('.pop-select').addEventListener("transitionend", e =>{
-                    document.querySelector('.pop-select').remove();
-
-                })
-
-
-
-                // $("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open").focus();
-                const select = document.querySelector("select[name='" + id + "']");
-                const btsel = select.closest(".select-pop").querySelector(".btsel");
-                btsel.classList.remove("open");
-                btsel.focus();
-
-
-
-                document.body.classList.remove("is-pop-select");
-                console.log( "select[name="+id+"] 값 = " ,  select.value );
-            }
-        },
-    }
-    ui.popsel.init();
-</script>
+        }
+        ui.popsel.init();
+    </script>
 </body>
 
 </html>

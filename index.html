@@ -65,23 +65,15 @@
                     this.set();
                 },
                 evt:function(){
-                    var _this = this;
+                    const _this = this;
 
 
                     document.addEventListener("click", function(e) {
                         const target = e.target;
-                        if ( target.classList.contains("pop-select") && !target.closest(".pop-select .pbd") )  {   
+                        if( target.classList.contains("pop-select") && !target.closest(".pop-select .pbd") )  {   
                             _this.close();
                         }
                     });
-                    /*
-                    $(document).on("click",".pop-select",function(e) {
-                        console.log(e.target);
-                        if ( !$(e.target).closest(".pop-select .pbd").length ) {
-                            _this.close();
-                        }
-                    });
-                    */
 
                     document.addEventListener("click", function(e) {
                         const target = e.target;
@@ -96,19 +88,6 @@
                             _this.open(name, tit, list, sel);
                         }
                     });
-
-                    // $(document).on("click",".select-pop .btsel:not(.open)",function(){
-
-                    //     var $pop = $(this).closest(".select-pop");
-                    //     var name = $pop.find(".slist").attr("name");
-                    //     var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
-                    //     var sel =  $pop.find(".slist").val();
-                    //     var list = [];
-                        
-                    //     // console.log(name,tit,list,sel);
-                    //     _this.open(name,tit,list,sel);
-                    //     $(".ui-sorts").removeClass("open");
-                    // });
 
                     
                     document.addEventListener("click", function(e) {
@@ -130,36 +109,16 @@
                     });
 
                     
-                    /* $(document).on("click",".pop-select .btsbot .btcom",function(e){
-                        var sel = $(this).closest(".pop-select").find(".swiper-slide-active .bt").attr("value");
-                        var txt = $(this).closest(".pop-select").find(".swiper-slide-active .bt").text();
-                        var name =  $(this).closest(".pop-select").data("selt-pop");
-                        var tit = $("select[name='"+name+"']").data("select-title");
-                        // console.log(name,sel);
-                        $("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
-                        $("select[name='"+name+"']").val(sel).prop("selected",true);
-                        $("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
-                        $("select[name='"+name+"']").trigger("change");
-                        _this.close();
-                    }); */
-
                     document.addEventListener("click", function(e) {
                         const target = e.target;
                         if (target.closest(".pop-select .btn-sel-close")) {
                             _this.close();    
                         }
                     });
-                    /* 
-                    $(document).on("click",".pop-select .btn-sel-close",function(){
-                        _this.close();
-                    });
-                    */
                 },
                 sld:{ // 
                     els:".pop-select .swiper-container",
                     opt: {
-                        // freeMode: true,
-                        // freeModeSticky:true,
                         centeredSlides:true,
                         direction:"vertical",
                         slidesPerView: 3,
@@ -168,10 +127,10 @@
                             sticky: true,
                             momentumRatio: 0.2,
                         },
-                        // mousewheel: {
-                        // 	invert: false,
-                        // 	sensitivity: 0.2,
-                        // },
+                        mousewheel: {
+                        	invert: false,
+                        	sensitivity: 0.2,
+                        },
                         speed: 100,  // 300
                         freeModeMomentumRatio: 1.2,  // 1
                         observer: true,
@@ -181,12 +140,6 @@
                         loop: false
                     },
                     using: function() {
-                        /*                  
-                        if( $(".pop-select .swiper-container").find(".swiper-slide").length <= 1 ) {
-                            this.opt.loop = false;
-                        }
-                        this.slide = new Swiper(this.els, this.opt); */
-
                         if( document.querySelectorAll(this.els +" .swiper-slide").length <= 1) {
                             this.opt.loop = false;
                         }
@@ -194,38 +147,7 @@
                     }
                 },
                 set:function(update){
-                    /*
-                    $(".select-pop").each(function(){
-                        if( !$(this).find(".btsel").length ) {
-                            $(this).prepend('<button class="btsel" type="button"></button>');
-                        }
-                        if( !$(this).is(".set").length ) {
-                            $(this).addClass("set");
-                        }
-                        var $btsel = $(this).find(".btsel");
-                        $btsel.addClass("is-tit");			
-                        var txt = $(this).find(".slist option:selected").text() ;
-                        var dis = $(this).find(".slist").prop("disabled");
-                        var list = [];
-                        $(this).find(".slist option").each(function(){
-                            var isDis = $(this).prop("disabled");
-                            list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
-                        });
-                        // console.log(list ,txt ,dis);
-                        if (update == "update") {
-                            tit = $(this).find(".slist>option:selected").text();
-                        }else{
-                            tit = $(this).find(".slist").data("select-title")|| $(this).find(".slist>option:selected").text();
-                        }
-                        $btsel.html('<i class="txt">'+txt+'</i>');
 
-                        if( dis == true ) {
-                            $btsel.prop("disabled",true);
-                        }else{
-                            $btsel.prop("disabled",false);
-                        }
-                    });
-                    */
                     document.querySelectorAll(".select-pop").forEach(function(selectPop) {
                         if (!selectPop.querySelector(".btsel")) {
                             selectPop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
@@ -233,25 +155,19 @@
                         if (!selectPop.classList.contains("set")) {
                             selectPop.classList.add("set");
                         }
-                        var btsel = selectPop.querySelector(".btsel");
+                        const btsel = selectPop.querySelector(".btsel");
                         btsel.classList.add("is-tit");
-                        var selectedOption = selectPop.querySelector(".slist option:checked");
-                        var txt = selectedOption ? selectedOption.textContent : "";
-                        var dis = selectPop.querySelector(".slist").disabled;
-                        var list = [];
+                        const selectedOption = selectPop.querySelector(".slist option:checked");
+                        const txt = selectedOption ? selectedOption.textContent : "";
+                        const dis = selectPop.querySelector(".slist").disabled;
+                        const list = [];
                         selectPop.querySelectorAll(".slist option").forEach(function(option) {
-                            var isDis = option.disabled;
+                            const isDis = option.disabled;
                             list.push({ v: option.value, t: option.textContent, d: isDis });
                         });
                         // console.log(list, txt, dis);
-                        var tit;
-                        if (update === "update") {
-                            tit = selectedOption ? selectedOption.textContent : "";
-                        } else {
-                            tit = selectPop.querySelector(".slist").getAttribute("data-select-title") || (selectedOption ? selectedOption.textContent : "");
-                        }
-                        btsel.innerHTML = '<i class="txt">' + txt + '</i>';
 
+                        btsel.innerHTML = '<i class="txt">' + txt + '</i>';
                         if (dis) {
                             btsel.disabled = true;
                         } else {
@@ -263,34 +179,20 @@
                 },
                 open:function(name,tit,list,sel){
                     
-                    // $(".pop-select.on").remove();
                     document.querySelectorAll('.pop-select.on').forEach( (pop)=>  pop.remove());
 
-                    // if ( $(".pop-select:visible").length ) { return; }
                     if (document.querySelector('.pop-select:is(:visible)')) {
                         return;
                     }
 
-                    /* $("[name='"+name+"']").find("option").each(function(){
-                        var isDis = $(this).prop("disabled");
-                        list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
-                    }); */
                     list = Array.from(document.querySelectorAll("[name='" + name + "'] option"), (option) => {
                         return { v: option.value, t: option.textContent, d: option.disabled };
                     });
 
-
-                    
-
                     let blist="";
                     for(let i in list) {
                         // console.log(list[i].d);
-                        let dis;
-                        if (list[i].d == true) {
-                            dis = "disabled";
-                        }else{
-                            dis = "";
-                        }
+                        let dis = list[i].d == true ? "disabled" : null;
                         blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
                     }
                     const lyPop =
@@ -312,36 +214,21 @@
                     '</article>';
                     
                     
-                    // $("body").append(lyPop);
                     document.body.insertAdjacentHTML("beforeend", lyPop);
-
 
                     this.sld.using();
                     
-
-                    // $("[name='"+name+"']").closest(".select-pop").find(".btsel").addClass("open");
                     document.querySelector("[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.add("open");
-
-                    
                     
                     const _this = this;
                     
-                    // $(".pop-select").addClass("on").attr("tabindex","0").focus();
                     document.querySelector(".pop-select").classList.add("on");
                     document.querySelector(".pop-select").tabIndex = 0;
                     document.querySelector(".pop-select").focus();
 
 
                     console.log(name, sel);
-                    // window.setTimeout(() => {
-                        
-                    //     $("[data-selt-pop='"+name+"'] .list .bt[value='"+sel+"']").addClass("active").closest("li").addClass("active");
-                    // }, 100);
                     document.querySelector("[data-selt-pop='" + name + "'] .list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
-
-
-                    /* var activeIdx = $("[data-selt-pop='"+name+"'] .list>li.active").index();
-                    _this.sld.slide.slideTo(activeIdx); */
                     
                     const ul = document.querySelector("[data-selt-pop='" + name + "']  .list");
                     const li = ul.querySelectorAll("li");
@@ -353,50 +240,29 @@
 
 
                     _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
-                        // var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
                         const isActDis = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
                         // console.log("END" , isActDis);
                         if (isActDis == true) {
-                            // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",true);
                             document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = true );
-
                         }else{
-                            // $("[data-selt-pop='"+name+"'] .btcom").prop("disabled",false);
                             document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = false );
                         }
                     });
-
-                    // ui.lock.using(true);
                     document.body.classList.add("is-pop-select");
 
                 },
                 close:function(){
-                    // var id = $(".pop-select.on").data("selt-pop");
-                    var id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
-
-
-
-                    /* $(".pop-select").removeClass("on").fadeOut(100,function(){
-                        $(this).remove();
-                        // ui.lock.using(false);
-                    }); */
-
+                    const id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
 
                     document.querySelector('.pop-select')?.classList.remove("on")
                     document.querySelector('.pop-select').addEventListener("transitionend", e =>{
                         document.querySelector('.pop-select').remove();
 
-                    })
-
-
-
-                    // $("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open").focus();
+                    });
                     const select = document.querySelector("select[name='" + id + "']");
                     const btsel = select.closest(".select-pop").querySelector(".btsel");
                     btsel.classList.remove("open");
                     btsel.focus();
-
-
 
                     document.body.classList.remove("is-pop-select");
                     console.log( "select[name="+id+"] 값 = " ,  select.value );

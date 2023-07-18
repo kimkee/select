@@ -79,7 +79,7 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px 0px 0px;}
 .pop-select::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
 .pop-select .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;background:#ffffff;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;width: calc(100% - 0px);margin-bottom: 0px;overflow: initial;border-radius: 16px 16px 0px 0px;box-shadow: 0 -1px 9px 0 rgba(0,0,0,0.3);}
-.pop-select .phd{position: relative;height: 45px;display: none;}
+.pop-select .phd{position: relative;height: 54px;display: none;}
 .pop-select .phd.is-tit{display: block;margin-bottom: -20px;}
 .pop-select .phd .ptit{font-size: 16rem;text-align: left;padding: 16px 40px 0px 20px;/* font-weight: 700; */color: #666;}
 .pop-select .pct{overflow: hidden;}

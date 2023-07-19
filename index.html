@@ -3,16 +3,16 @@
 <head>
     <title>Select</title>
     <meta charset="utf-8">
-    <link href="https://kimkee.github.io/ui/static/img/common/favicon.ico" rel="shrtcut icon">
+    <link href="//kimkee.github.io/ui/static/img/common/favicon.ico" rel="shrtcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <script src="//cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="body">
     
     <span class="select-pop">
-        <select class="slist" name="select_pop_1" data-select-title="">
+        <select class="slist" name="select_pop_1">
             <option value="val_0">옵션 선택</option>
             <option value="val_1">1번째 선택</option>
             <option value="val_2">2번째 선택</option>
@@ -156,6 +156,7 @@
                         if (!pop.classList.contains("set")) {
                             pop.classList.add("set");
                         }
+                        pop.querySelector(".slist").tabIndex = "-1"
                         const btsel = pop.querySelector(".btsel");
                         
                         const selectedOption = pop.querySelector(".slist option:checked");

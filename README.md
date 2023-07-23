@@ -13,6 +13,21 @@ If you have any issues, please leave a comment  https://github.com/kimkee/select
 I don't like using jQuery, so I changed it to javascript
 
 
+<div style="max-width: 700px">
+    <table cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <td><img src="./img/ss_01.png"> </td>
+                <td><img src="./img/ss_02.png"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- | 1 | 2 |
+| :---: | :---: |
+| <img src="./img/ss_01.png"> | <img src="./img/ss_02.png"> | -->
+
 
 ``` html
 <span class="select-pop">

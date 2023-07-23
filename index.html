@@ -56,6 +56,15 @@
             document.querySelector("select[name='select_pop_2']").disabled = false;
             ui.popsel.set();
         }
+
+        document.querySelectorAll(".box").forEach(box => {
+            const pElm = box.parentElement;
+            while (box.firstChild) {
+                pElm.insertBefore(box.firstChild, box);
+            }
+            pElm.removeChild(box);
+        });
+
     </script>
 
     <script>

@@ -68,10 +68,10 @@
 
         /* $(".box").wrap(`<div class="www"></div>`) */
         document.querySelectorAll(".box").forEach(box => {
-            const wrapperDiv = document.createElement("div");
-            wrapperDiv.classList.add("www");
-            box.parentNode.insertBefore(wrapperDiv, box);
-            wrapperDiv.appendChild(box);
+            const wrap = document.createElement("div");
+            wrap.classList.add("www");
+            box.parentNode.insertBefore(wrap, box);
+            wrap.appendChild(box);
         });
 
     </script>

@@ -66,6 +66,14 @@
             pElm.removeChild(box);
         });
 
+        /* $(".box").wrap(`<div class="www"></div>`) */
+        document.querySelectorAll(".box").forEach(box => {
+            const wrapperDiv = document.createElement("div");
+            wrapperDiv.classList.add("www");
+            box.parentNode.insertBefore(wrapperDiv, box);
+            wrapperDiv.appendChild(box);
+        });
+
     </script>
 
     <script src="./select.js"></script>

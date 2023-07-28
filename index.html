@@ -81,8 +81,11 @@
         // $("body,html").animate({ scrollTop: 0 }, 200, function() {
         //         console.log("도착")
         // });
-        const scrollToPosition = (element, position, duration, callback) => {
-            const startingYOffset = element === document.body ? window.pageYOffset : element.scrollTop;
+        const scrollToPosition = (selector, position, duration, callback) => {
+            const element = document.querySelector(selector);
+            if (!element) return;
+
+            const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
             const targetYOffset = position;
             const startTime = performance.now();
 

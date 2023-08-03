@@ -60,6 +60,16 @@
             ui.popsel.set();
         }
 
+        /* $(this).addClass("active").siblings("li").removeClass("active"); */
+        document.querySelectorAll(".btn.sm").forEach(li => {
+            li.addEventListener("click", () => {
+                li.classList.add("active");
+                [...li.parentNode.children].filter(sibling => sibling !== li)
+                .forEach(sibling => sibling.classList.remove("active"));
+            });
+        });
+
+
         /*  $(".box").unwrap() */
         document.querySelectorAll(".box").forEach(box => {
             const pElm = box.parentElement;

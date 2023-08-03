@@ -113,7 +113,7 @@ button{cursor:pointer;background: none;border: none;}
 .is-pop-select{}
 
 .btn{border: 1px solid #666666;color: #666666;padding: 7px 10px;border-radius: 6px;}
-
+.btn.active{color: #cdcdcd;background: #00000057;}
 @media (prefers-color-scheme: dark) {
     body{background-color: #252525;}
     .txt{}

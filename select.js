@@ -155,7 +155,7 @@
 
             _this.sld.slide.slideTo(activeIdx);
 
-            _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
+            _this.sld.slide.on("init slideChangeTransitionEnd scroll",function(){
                 const isAct = pop.querySelector(".list>li.swiper-slide-active")?.classList.contains("disabled");
                 pop.querySelector(".btcom").disabled =  isAct == true ? true : false;
             });

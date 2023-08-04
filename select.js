@@ -1,4 +1,4 @@
-const ui = {
+﻿const ui = {
     popsel:{ // 셀렉트 스와이프
         init:function(){
             this.evt();
@@ -9,10 +9,10 @@ const ui = {
             document.addEventListener("click", (e)=> {
                 const target = e.target;
                 if (target.closest(".select-pop .btsel:not(.open)")) {
-                    const pop = target.closest(".select-pop");
-                    const name = pop.querySelector(".slist").getAttribute("name");
-                    const tit = pop.querySelector(".slist").getAttribute("data-select-title") || "";
-                    const sel = pop.querySelector(".slist").value;
+                    const select = target.closest(".select-pop").querySelector(".slist");
+                    const name = select.getAttribute("name");
+                    const tit = select.getAttribute("data-select-title") || "";
+                    const sel = select.value;
                     const list = [];
                     // console.log(name, tit, list, sel);
                     this.open(name, tit, list, sel);
@@ -22,17 +22,17 @@ const ui = {
             document.addEventListener("click", (e)=> {
                 const target = e.target;
                 if (target.closest(".pop-select .btsbot .btcom")) {
-                    const sel = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
+                    const val = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
                     const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
                     const name = target.closest(".pop-select").getAttribute("data-selt-pop");
-                    const tit = document.querySelector("select[name='" + name + "']").getAttribute("data-select-title");
+                    const select = document.querySelector("select[name='" + name + "']")
                     
                     // console.log(name, sel);
-                    document.querySelector("select[name='" + name + "'] > option[value='" + sel + "']").selected = true;
-                    document.querySelector("select[name='" + name + "']").value = sel;
-                    document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
-                    document.querySelector("select[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
-                    document.querySelector("select[name='" + name + "']").dispatchEvent(new Event("change"));
+                    select.querySelector("option[value='" + val + "']").selected = true;
+                    select.value = val;
+                    select.closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
+                    select.closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
+                    select.dispatchEvent(new Event("change"));
                     this.close();
                 }
             });
@@ -144,9 +144,9 @@ const ui = {
             
             const _this = this;
             
-            document.querySelector(".pop-select").classList.add("on");
-            document.querySelector(".pop-select").tabIndex = 0;
-            document.querySelector(".pop-select").focus();
+            document.querySelector("[data-selt-pop="+name+"]").classList.add("on");
+            document.querySelector("[data-selt-pop="+name+"]").tabIndex = 0;
+            document.querySelector("[data-selt-pop="+name+"]").focus();
 
 
             console.log(name, sel);

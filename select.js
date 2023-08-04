@@ -134,42 +134,34 @@
                     </div>
                 </div>
             </article>`;
-            
-            
             document.body.insertAdjacentHTML("beforeend", lyPop);
 
             this.sld.using();
             
-            document.querySelector("[name='" + name + "']").closest(".select-pop").querySelector(".btsel").classList.add("open");
+            document.querySelector("select[name='"+name+"']").closest(".select-pop").querySelector(".btsel").classList.add("open");
             
             const _this = this;
-            
-            document.querySelector("[data-selt-pop="+name+"]").classList.add("on");
-            document.querySelector("[data-selt-pop="+name+"]").tabIndex = 0;
-            document.querySelector("[data-selt-pop="+name+"]").focus();
-
+            const pop = document.querySelector("[data-selt-pop='"+name+"']");
+            pop.classList.add("on");
+            pop.tabIndex = 0;
+            pop.focus();
 
             console.log(name, sel);
-            document.querySelector("[data-selt-pop='" + name + "'] .list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
+            pop.querySelector(".list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
             
-            const ul = document.querySelector("[data-selt-pop='" + name + "']  .list");
+            const ul = pop.querySelector(".list");
             const li = ul.querySelectorAll("li");
             const activeIdx = Array.from(li).indexOf(ul.querySelector("li.active"));
             console.log(activeIdx);
 
             _this.sld.slide.slideTo(activeIdx);
 
-
-
             _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
-                const isActDis = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
+                const isAct = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
                 // console.log("END" , isActDis);
-                if (isActDis == true) {
-                    document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = true );
-                }else{
-                    document.querySelectorAll("[data-selt-pop='" + name + "'] .btcom").forEach( bt=> bt.disabled = false );
-                }
+                pop.querySelector(".btcom").disabled =  isAct == true ? true : false;
             });
+
             document.body.classList.add("is-pop-select");
 
         },

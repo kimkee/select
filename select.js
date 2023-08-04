@@ -25,12 +25,12 @@
                     const val = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").getAttribute("value");
                     const txt = target.closest(".pop-select").querySelector(".swiper-slide-active .bt").textContent;
                     const name = target.closest(".pop-select").getAttribute("data-selt-pop");
-                    const select = document.querySelector("select[name='" + name + "']")
+                    const select = document.querySelector(`select[name='${name}']`)
                     
                     // console.log(name, sel);
-                    select.querySelector("option[value='" + val + "']").selected = true;
+                    select.querySelector(`option[value='${val}']`).selected = true;
                     select.value = val;
-                    select.closest(".select-pop").querySelector(".btsel").innerHTML = '<i class="txt">' + txt + '</i>';
+                    select.closest(".select-pop").querySelector(".btsel").innerHTML = `<i class="txt">${txt}</i>`;
                     select.closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
                     select.dispatchEvent(new Event("change"));
                     this.close();
@@ -65,7 +65,7 @@
                 loop: false
             },
             using: function() {
-                if( document.querySelectorAll(this.els +" .swiper-slide").length <= 1) {
+                if( document.querySelectorAll(`${this.els} .swiper-slide`).length <= 1) {
                     this.opt.loop = false;
                 }
                 this.slide = new Swiper(this.els, this.opt);
@@ -93,7 +93,7 @@
                 });
                 // console.log(list, txt, dis);
 
-                btsel.innerHTML = '<i class="txt">' + txt + '</i>';
+                btsel.innerHTML = `<i class="txt">${txt}</i>`;
                 btsel.disabled = dis ? true : false;
                 
             });
@@ -106,7 +106,7 @@
 
             if (document.querySelector('.pop-select:is(:visible)')) { return; }
 
-            document.querySelectorAll("[name='" + name + "'] option").forEach( option => {
+            document.querySelectorAll(`[name='${name}'] option`).forEach( option => {
                 list.push( { v: option.value, t: option.textContent, d: option.disabled } );
             });
             console.log(list);
@@ -137,16 +137,16 @@
 
             this.sld.using();
             
-            document.querySelector("select[name='"+name+"']").closest(".select-pop").querySelector(".btsel").classList.add("open");
+            document.querySelector(`select[name='${name}']`).closest(".select-pop").querySelector(".btsel").classList.add("open");
             
             const _this = this;
-            const pop = document.querySelector("[data-selt-pop='"+name+"']");
+            const pop = document.querySelector(`[data-selt-pop='${name}']`);
             pop.classList.add("on");
             pop.tabIndex = 0;
             pop.focus();
 
             console.log(name, sel);
-            pop.querySelector(".list .bt[value='" + sel + "']")?.closest("li")?.classList.add("active");
+            pop.querySelector(`.list .bt[value='${sel}']`)?.closest("li")?.classList.add("active");
             
             const ul = pop.querySelector(".list");
             const li = ul.querySelectorAll("li");
@@ -168,13 +168,13 @@
             if(!id) {return};
             document.querySelector('.pop-select')?.classList.remove("on")
             document.querySelector('.pop-select').addEventListener("transitionend", pop => pop.target.remove() );
-            const select = document.querySelector("select[name='" + id + "']");
+            const select = document.querySelector(`select[name='${id}']`);
             const btsel = select?.closest(".select-pop").querySelector(".btsel");
             btsel.classList.remove("open");
             btsel.focus();
 
             document.body.classList.remove("is-pop-select");
-            console.log( "select[name="+id+"] 값 = " ,  select.value );
+            console.log( `select[name="${id}"] 값 = " ,  ${select.value} `);
         }
     },
 }

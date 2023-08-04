@@ -33,13 +33,13 @@
                     select.closest(".select-pop").querySelector(".btsel").innerHTML = `<i class="txt">${txt}</i>`;
                     select.closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");
                     select.dispatchEvent(new Event("change"));
-                    this.close();
+                    this.close(e);
                 }
             });
 
-            document.addEventListener("click", (e) => e.target.classList.contains("pop-select") ? this.close() : null );
+            document.addEventListener("click", (e) => e.target.classList.contains("pop-select") ? this.close(e) : null );
             
-            document.addEventListener("click", (e) => e.target.closest(".pop-select .btn-sel-close") ? this.close() : null );
+            document.addEventListener("click", (e) => e.target.closest(".pop-select .btn-sel-close") ? this.close(e) : null );
 
         },
         sld:{ // 
@@ -77,7 +77,7 @@
         },
         set:function(){
 
-            document.querySelectorAll(".select-pop").forEach(function(pop) {
+            document.querySelectorAll(".select-pop").forEach( (pop)=> {
                 if (!pop.querySelector(".btsel")) {
                     pop.insertAdjacentHTML("afterbegin", '<button class="btsel" type="button"></button>');
                 }
@@ -99,7 +99,6 @@
 
                 btsel.innerHTML = `<i class="txt">${txt}</i>`;
                 btsel.disabled = dis ? true : false;
-                
             });
 
 
@@ -167,8 +166,9 @@
             document.body.classList.add("is-pop-select");
 
         },
-        close:function(){
-            const id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
+        close:function(e){
+            console.log(e.target);
+            const id = e.target.closest(".pop-select")?.getAttribute("data-selt-pop");
             if(!id) {return};
             console.log(id);
             document.querySelector('.pop-select')?.classList.remove("on")

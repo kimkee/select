@@ -53,6 +53,10 @@
                     sticky: true,
                     momentumRatio: 0.2,
                 },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: false,
+                },
                 mousewheel: {
                     invert: false,
                     sensitivity: 0.2,
@@ -166,6 +170,7 @@
         close:function(){
             const id = document.querySelector('.pop-select.on')?.getAttribute("data-selt-pop");
             if(!id) {return};
+            console.log(id);
             document.querySelector('.pop-select')?.classList.remove("on")
             document.querySelector('.pop-select').addEventListener("transitionend", pop => pop.target.remove() );
             const select = document.querySelector(`select[name='${id}']`);

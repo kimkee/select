@@ -58,7 +58,6 @@
                     sensitivity: 0.2,
                 },
                 speed: 100,  // 300
-                freeModeMomentumRatio: 1.2,  // 1
                 observer: true,
                 observeParents: true,
                 spaceBetween:0,
@@ -157,8 +156,7 @@
             _this.sld.slide.slideTo(activeIdx);
 
             _this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
-                const isAct = document.querySelector("[data-selt-pop='" + name + "'] .list>li.swiper-slide-active")?.classList.contains("disabled");
-                // console.log("END" , isActDis);
+                const isAct = pop.querySelector(".list>li.swiper-slide-active")?.classList.contains("disabled");
                 pop.querySelector(".btcom").disabled =  isAct == true ? true : false;
             });
 

@@ -41,6 +41,60 @@
         </select>
     </span>
 
+    <div class="test-box">
+        <span class="select-pop">
+            <select class="slist" name="select_month">
+                <option>01월</option>
+                <option>02월</option>
+                <option>03월</option>
+                <option>04월</option>
+                <option>05월</option>
+                <option selected>06월</option>
+                <option>07월</option>
+                <option>08월</option>
+                <option>09월</option>
+                <option>10월</option>
+                <option>11월</option>
+                <option>12월</option>
+            </select>
+        </span>
+        <span class="select-pop">
+            <select class="slist" name="select_days">
+                <option>01일</option>
+                <option>02일</option>
+                <option>03일</option>
+                <option>04일</option>
+                <option>05일</option>
+                <option>06일</option>
+                <option selected>07일</option>
+                <option>08일</option>
+                <option>09일</option>
+                <option>10일</option>
+                <option>11일</option>
+                <option>12일</option>
+                <option>13일</option>
+                <option>14일</option>
+                <option>15일</option>
+                <option>16일</option>
+                <option>17일</option>
+                <option>18일</option>
+                <option>19일</option>
+                <option>20일</option>
+                <option>21일</option>
+                <option>22일</option>
+                <option>23일</option>
+                <option>24일</option>
+                <option>25일</option>
+                <option>26일</option>
+                <option>27일</option>
+                <option>28일</option>
+                <option>29일</option>
+                <option>30일</option>
+                <option>31일</option>
+            </select>
+        </span>
+    </div>
+
     <div>
         <button type="button" class="btn sm" onclick="test_select_1();">B번째 선택</button>
         <button type="button" class="btn sm" onclick="test_select_2();">비활성화</button>
@@ -60,6 +114,19 @@
             ui.popsel.set();
         }
 
+
+        const datepicks = {
+            month:[ "1","2","3","4","5","6","7","8","9","10","11","12"],
+            days:[ "1","2","3","4","5","6","7","8","9","10","11","12","13"],
+            init: function(){
+                
+            },
+            set: function(){
+                document.querySelector
+            },
+        }
+
+        
         /* $(this).addClass("active").siblings("li").removeClass("active"); */
         document.querySelectorAll(".btn.sm").forEach(li => {
             li.addEventListener("click", () => {

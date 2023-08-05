@@ -28,7 +28,7 @@
                     const select = document.querySelector(`select[name='${name}']`)
                     
                     // console.log(name, sel);
-                    select.querySelector(`option[value='${val}']`).selected = true;
+                    // select.querySelector(`option[value='${val}']`).selected = true;
                     select.value = val;
                     select.closest(".select-pop").querySelector(".btsel").innerHTML = `<i class="txt">${txt}</i>`;
                     select.closest(".select-pop").querySelector(".btsel").classList.remove("is-tit");

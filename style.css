@@ -90,7 +90,7 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select.on .pbd{transform: translateY(0%);}
 .pop-select .slide{overflow: hidden;height: 181px;position: relative;}
 .pop-select .slide::before,
-.pop-select .slide::after{height: 1rem;background: #eeeeee;left: 0;right: 0;position: absolute;content:"";}
+.pop-select .slide::after{height: 1rem;background: #cfcfcf;left: 0;right: 0;position: absolute;content:"";}
 .pop-select .slide::before{top: 60px;}
 .pop-select .slide::after{bottom: 60px;}
 .pop-select .list{padding: 0px 0px 0px 0px;padding-bottom: calc(20px + var(--safe-bottom));width: 100%;}
@@ -128,3 +128,10 @@ button{cursor:pointer;background: none;border: none;}
 	.pop-select .slide::before,
 	.pop-select .slide::after{background-color: #1c1c1c;}
 }
+
+
+
+
+/* Exmple */
+.test-box{display: flex;gap: 10px;width: 100%;}
+.test-box .select-pop{width: 100%;}

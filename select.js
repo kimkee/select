@@ -47,7 +47,8 @@
             opt: {
                 centeredSlides:true,
                 direction:"vertical",
-                slidesPerView: 3,
+                slidesPerView: 5,
+                spaceBetween: 10,
                 freeMode: {
                     enabled: true,
                     sticky: true,

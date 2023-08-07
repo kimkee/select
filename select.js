@@ -124,7 +124,6 @@
             `<article class="pop-select" data-selt-pop="${name}">
                 <div class="pbd">
                     <div class="phd ${tit ? 'is-tit':''}" ><h3 class="ptit">${tit}</h3></div>
-                    <button type="button" class="btn-sel-close">닫기</button>
                     <div class="pct">
                         <main class="poptents">
                             <div class="swiper-container slide">
@@ -135,6 +134,7 @@
                             </div>
                         </main>
                     </div>
+                    <button type="button" class="btn-sel-close">닫기</button>
                 </div>
             </article>`;
             document.body.insertAdjacentHTML("beforeend", lyPop);

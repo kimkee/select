@@ -52,20 +52,30 @@
 
     <div>
         <button type="button" class="btn sm" onclick="test_select_1();">B번째 선택</button>
-        <button type="button" class="btn sm" onclick="test_select_2();">비활성화</button>
-        <button type="button" class="btn sm" onclick="test_select_3();">활성화</button>
+        <button type="button" class="btn sm" onclick="test_select_2(this);">비활성화</button>
+        
+        <button type="button" class="btn sm" onclick="test_select_4();">12월25일</button>
     </div>
     <script>
         const test_select_1 = () => {
             document.querySelector("select[name='select_pop_2']").value = "val_B";
             ui.popsel.set();
         }
-        const test_select_2 = () => {
-            document.querySelector("select[name='select_pop_2']").disabled = true;
+        const test_select_2 = (e) => {
+            console.log(e.innerText);
+            const select = document.querySelector("select[name='select_pop_2']");
+            if (select.disabled == true) {
+                select.disabled = false;
+                e.innerText = "비활성화"
+            }else{
+                select.disabled = true;
+                e.innerText = "활성화"
+            }
             ui.popsel.set();
         }
-        const test_select_3 = () => {
-            document.querySelector("select[name='select_pop_2']").disabled = false;
+        const test_select_4 = () => {
+            document.querySelector(`[name="select_month"]`).value = "12"
+            document.querySelector(`[name="select_days"]`).value = "25"
             ui.popsel.set();
         }
 

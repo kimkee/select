@@ -62,15 +62,10 @@
             ui.popsel.set();
         }
         const test_select_2 = (e) => {
-            console.log(e.innerText);
-            const select = document.querySelector("select[name='select_pop_2']");
-            if (select.disabled == true) {
-                select.disabled = false;
-                e.innerText = "비활성화"
-            }else{
-                select.disabled = true;
-                e.innerText = "활성화"
-            }
+            const sel = document.querySelector("select[name='select_pop_2']");
+            const btn = e;
+            sel.disabled  = sel.disabled ? false : true;
+            btn.innerText = sel.disabled ? "비활성화" : "활성화";
             ui.popsel.set();
         }
         const test_select_4 = () => {

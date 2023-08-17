@@ -115,11 +115,6 @@
             });
             console.log(list);
             
-            const blist = list.map( (li, i) => {
-                const dis = list[i].d == true ? "disabled" : null;
-                return `<li class="swiper-slide ${dis}"><span class="bt ${dis}" ${dis} value="${list[i].v}">${list[i].t}</span></li>`;
-            }).join("");
-
             const lyPop =
             `<article class="pop-select" data-selt-pop="${name}">
                 <div class="pbd">
@@ -127,7 +122,12 @@
                     <div class="pct">
                         <main class="poptents">
                             <div class="swiper-container slide">
-                                <ul class="swiper-wrapper list">${blist}</ul>
+                                <ul class="swiper-wrapper list">
+                                    ${list.map( (li, i) => {
+                                        const dis = list[i].d == true ? "disabled" : null;
+                                        return `<li class="swiper-slide ${dis}"><span class="bt ${dis}" ${dis} value="${list[i].v}">${list[i].t}</span></li>`;
+                                    }).join("")}
+                                </ul>
                             </div>
                             <div class="btsbot btn-set">
                                 <button type="button" class="btn a lg btcom">완료</button>

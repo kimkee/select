@@ -96,13 +96,13 @@ button{cursor:pointer;background: none;border: none;}
 .pop-select .list{padding: 0px 0px 0px 0px;padding-bottom: calc(20px + var(--safe-bottom));width: 100%;}
 .pop-select .list>li{text-align: center;color: #666666;font-weight: 400;display: flex;justify-content: center;align-items: center;}
 .pop-select .list>li:last-child{border-bottom-width: 0px;}
-.pop-select .list>li .bt{padding: 4px 0px 4px 0px;font-size: 14rem;display: flex;justify-content: center;align-items: center;min-height: 59px;position: relative;color: #cccccc;/* opacity: 0.25; */cursor: default;line-height: 1.2;transition: font 0.2s;}
+.pop-select .list>li .bt{padding: 4px 0px 4px 0px;font-size: 14rem;display: flex;justify-content: center;align-items: center;min-height: 59px;position: relative;color: #777777;cursor: default;line-height: 1.2;transition: font 0.2s;}
 .pop-select .list>li.swiper-slide-active{}
-.pop-select .list>li.swiper-slide-active .bt{color:#000000;opacity: 1;transform: scale(1);}
-.pop-select .list>li.swiper-slide-active .bt.disabled{color:#666666;opacity: 0.4;}
+.pop-select .list>li.swiper-slide-active .bt{color: #669aff;opacity: 1;transform: scale(1);}
+.pop-select .list>li.swiper-slide-active.disabled .bt{}
 .pop-select .list>li input{opacity:0;left:-999em;position: absolute;}
 .pop-select .list>li .bt.active{}
-.pop-select .list>li .bt:disabled{opacity: 0.5;}
+.pop-select .list>li.disabled .bt{opacity: 0.5;}
 .pop-select .list>li .bt::before{display:none;width:24px;height:24px;content:"";background:  no-repeat center;background-size: 24px auto;position:absolute;left:0;top: 15px;}
 .pop-select .list>li .bt.active::before{display:block;}
 .pop-select .list>li .txt{ }
@@ -125,7 +125,7 @@ button{cursor:pointer;background: none;border: none;}
 	.pop-select .pbd{ background-color: #333; }
 	.pop-select .list>li .bt.active{}
 	.pop-select .list>li .bt{color: #767676;}
-	.pop-select .list>li.swiper-slide-active .bt{color: #ddd;font-size: 18rem;}
+	.pop-select .list>li.swiper-slide-active .bt{color: #669aff;font-size: 18rem;}
 	.pop-select .slide::before,
 	.pop-select .slide::after{background-color: #1c1c1c;}
 }

@@ -49,7 +49,6 @@ ui.popsel.set();
 ```
 
 ## 참조
-
 - https://swiperjs.com/
 - https://chat.openai.com/
 

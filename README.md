@@ -29,7 +29,14 @@ I don't like using jQuery, so I changed it to javascript
 
 
 ``` html
-<span class="select-pop">
+<!-- css-->
+<link rel="stylesheet" href="./style.css">  
+
+<!-- js-->
+<script src="./select.js">
+
+<!-- html-->
+<span class="select-pop"> 
     <select class="slist" name="select_pop_1">
         <option value="val_0">옵션 선택</option>
         <option value="val_1" selected>1번째 선택</option>

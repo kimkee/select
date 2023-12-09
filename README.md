@@ -50,10 +50,6 @@ I don't like using jQuery, so I changed it to javascript
         <option value="val_8">8번째 선택</option>
     </select>
 </span>
-<script>
-ui.popsel.set();
-</script>
-
 ```
 
 ``` js

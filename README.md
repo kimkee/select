@@ -30,10 +30,11 @@ I don't like using jQuery, so I changed it to javascript
 
 ``` html
 <!-- css-->
-<link rel="stylesheet" href="./style.css">  
+<link rel="stylesheet" href="https://kimkee.github.io/select/style.css">  
 
 <!-- js-->
-<script src="./select.js">
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js">
+<script src="https://kimkee.github.io/select/select.js">
 
 <!-- html-->
 <span class="select-pop"> 
@@ -49,6 +50,10 @@ I don't like using jQuery, so I changed it to javascript
         <option value="val_8">8번째 선택</option>
     </select>
 </span>
+<script>
+ui.popsel.set();
+</script>
+
 ```
 
 ``` js
